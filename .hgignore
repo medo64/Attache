@@ -1,0 +1,13 @@
+syntax: glob
+
+*.csproj.user
+*.suo
+
+Binaries/*
+Releases/*
+
+*/Bin/*
+*/bin/*
+*/Debug/*
+*/obj/*
+*/TestResults/*
