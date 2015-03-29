@@ -73,12 +73,10 @@ namespace Attache {
 
 
         private static TinyPacket CreateBeatPacket() {
-            var utcTime = DateTime.UtcNow;
-            var hostName = Dns.GetHostName();
-            var hostEntry = Dns.GetHostEntry(hostName);
-
-            var packet = new TinyPacket("Attaché", "Beat");
+            var packet = new TinyPacket("Attache", "Beat");
             packet.Add("Uptime", (Environment.TickCount / 1000).ToString("0", CultureInfo.InvariantCulture));
+
+            var hostEntry = Dns.GetHostEntry(Dns.GetHostName());
 
             var sbIPv4 = new StringBuilder();
             foreach (var address in hostEntry.AddressList) {
@@ -108,9 +106,6 @@ namespace Attache {
         }
 
         private static TinyPacket CreateVolumeInfoPacket() {
-            var hostName = Dns.GetHostName();
-            var utcTime = DateTime.UtcNow;
-
             var packet = new TinyPacket("Attache", "VolumeInfo");
 
             foreach (var drive in DriveInfo.GetDrives()) {

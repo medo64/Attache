@@ -19,7 +19,7 @@ namespace Attache {
         void Tiny_PacketReceived(object sender, TinyPacketEventArgs e) {
             var packet = e.Packet;
             this.Invoke((Action)delegate() {
-                var hostName = packet["Host"];
+                var hostName = packet[".Host"];
                 var group = NewGroup(hostName);
 
                 switch (packet.Operation) {

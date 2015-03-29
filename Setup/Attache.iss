@@ -55,7 +55,7 @@ Source: "Attache.pdb";  DestDir: "{app}";  Flags: ignoreversion;
 
 
 [Icons]
-Name: "{userstartmenu}\AttachÃ©";  Filename: "{app}\Attache.exe"
+Name: "{userstartmenu}\Attaché";  Filename: "{app}\Attache.exe"
 
 
 [Registry]
