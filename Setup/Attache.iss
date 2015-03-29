@@ -65,7 +65,7 @@ Root: HKCU;  Subkey: "Software\Josip Medved\Attache";  ValueType: none;    Flags
 
 [Run]
 Filename: "{app}\Attache.exe";  Parameters: "/Install";    Flags: runascurrentuser waituntilterminated;
-Filename: "{app}\Attache.exe";                             Flags: postinstall nowait skipifsilent runasoriginaluser;
+Filename: "{app}\Attache.exe";                             Flags: postinstall nowait skipifsilent runasoriginaluser;  Description: "Launch application now";
 
 
 [UninstallRun]

@@ -1,12 +1,12 @@
 namespace Attache {
     internal static class Configuration {
 
-        public static int CollectionInterval {
+        public static int VolumeInfoInterval {
             get { return 60; }
         }
 
-        public static int MessageInterval {
-            get { return 1; }
+        public static int BeatInterval {
+            get { return 2; }
         }
 
     }

@@ -45,24 +45,23 @@ namespace Attache {
                 var swSend = Stopwatch.StartNew();
 
                 using (var tiny = new Medo.Net.TinyMessage()) {
-                    var beat = CreateBeatPacket();
-                    var volumeInfo = CreateVolumeInfoPacket();
+                    TinyPacket volumeInfo = null;
 
                     while (!AppServiceThread.CancelEvent.WaitOne(0, false)) {
-                        if (swCollect.Elapsed.TotalSeconds >= Configuration.CollectionInterval) {
-                            beat.Dispose();
-                            volumeInfo.Dispose();
-                            
-                            beat = CreateBeatPacket();
+                        if ((volumeInfo == null) || (swCollect.Elapsed.TotalSeconds >= Configuration.VolumeInfoInterval)) {
+                            if (volumeInfo != null) { volumeInfo.Dispose(); }
                             volumeInfo = CreateVolumeInfoPacket();
 
                             swCollect.Restart();
                         }
 
-                        if (swSend.Elapsed.TotalSeconds >= Configuration.MessageInterval) {
-                            tiny.Send(beat);
+                        if (swSend.Elapsed.TotalSeconds >= Configuration.BeatInterval) {
+                            using (var beat = CreateBeatPacket()) {
+                                tiny.Send(beat);
+                            }
                             tiny.Send(volumeInfo);
 
+                            Debug.WriteLine(DateTime.Now.ToLongTimeString());
                             swSend.Restart();
                         }
 
@@ -79,9 +78,6 @@ namespace Attache {
             var hostEntry = Dns.GetHostEntry(hostName);
 
             var packet = new TinyPacket("Attaché", "Beat");
-            packet.Add("Host", hostName);
-            packet.Add("UtcTime", utcTime.ToString("O", CultureInfo.InvariantCulture));
-            packet.Add("Time", utcTime.ToLocalTime().ToString("O", CultureInfo.InvariantCulture));
             packet.Add("Uptime", (Environment.TickCount / 1000).ToString("0", CultureInfo.InvariantCulture));
 
             var sbIPv4 = new StringBuilder();
@@ -115,9 +111,7 @@ namespace Attache {
             var hostName = Dns.GetHostName();
             var utcTime = DateTime.UtcNow;
 
-            var packet = new TinyPacket("Attaché", "VolumeInfo");
-            packet.Add("Host", hostName);
-            packet.Add("UtcTime", utcTime.ToString("O", CultureInfo.InvariantCulture));
+            var packet = new TinyPacket("Attache", "VolumeInfo");
 
             foreach (var drive in DriveInfo.GetDrives()) {
                 var volumeLetter = drive.Name.Substring(0, 1);

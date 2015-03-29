@@ -14,6 +14,8 @@ namespace Attache {
             this.Tiny.PacketReceived += Tiny_PacketReceived;
         }
 
+        readonly TinyMessage Tiny = new TinyMessage() { ProductFilter = "Attache" };
+
         void Tiny_PacketReceived(object sender, TinyPacketEventArgs e) {
             var packet = e.Packet;
             this.Invoke((Action)delegate() {
@@ -67,8 +69,6 @@ namespace Attache {
                 }
             });
         }
-
-        readonly TinyMessage Tiny = new TinyMessage() { ProductFilter = "Attaché" };
 
         private void MainForm_Load(object sender, EventArgs e) {
 

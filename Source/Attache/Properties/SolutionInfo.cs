@@ -1,6 +1,6 @@
 using System.Reflection;
 
-[assembly: AssemblyProduct("Attaché")]
+[assembly: AssemblyProduct("Attache")]
 [assembly: AssemblyCompany("Josip Medved")]
 [assembly: AssemblyCopyright("Copyright (c) 2015 Josip Medved <jmedved@jmedved.com>")]
 
