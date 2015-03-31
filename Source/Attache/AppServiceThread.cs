@@ -44,7 +44,7 @@ namespace Attache {
                 var swCollect = Stopwatch.StartNew();
                 var swSend = Stopwatch.StartNew();
 
-                using (var tiny = new Medo.Net.TinyMessage()) {
+                using (var tiny = new Medo.Net.TinyMessage() { UseOnlyIPv6 = true }) {
                     TinyPacket volumeInfo = null;
 
                     while (!AppServiceThread.CancelEvent.WaitOne(0, false)) {

@@ -67,7 +67,7 @@
     <Compile Include="%28Medo%29\CallingAssembly [002].cs" />
     <Compile Include="%28Medo%29\ErrorReport [019].cs" />
     <Compile Include="%28Medo%29\State [015].cs" />
-    <Compile Include="%28Medo%29\TinyMessage [013].cs" />
+    <Compile Include="%28Medo%29\TinyMessage [014].cs" />
     <Compile Include="%28Medo%29\UnhandledCatch [008].cs" />
     <Compile Include="App.cs" />
     <Compile Include="AppService.cs">

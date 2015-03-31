@@ -14,7 +14,7 @@ namespace Attache {
             this.Tiny.PacketReceived += Tiny_PacketReceived;
         }
 
-        readonly TinyMessage Tiny = new TinyMessage() { ProductFilter = "Attache" };
+        readonly TinyMessage Tiny = new TinyMessage() { ProductFilter = "Attache", UseOnlyIPv6 = true };
 
         void Tiny_PacketReceived(object sender, TinyPacketEventArgs e) {
             var packet = e.Packet;
