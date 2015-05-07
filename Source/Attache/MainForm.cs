@@ -18,7 +18,7 @@ namespace Attache {
 
         void Tiny_PacketReceived(object sender, TinyPacketEventArgs e) {
             var packet = e.Packet;
-            this.Invoke((Action)delegate() {
+            this.Invoke((Action)delegate () {
                 var hostName = packet[".Host"];
                 var group = NewGroup(hostName);
 
@@ -76,6 +76,10 @@ namespace Attache {
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             this.Tiny.Close();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e) {
+            this.Tiny.Send(new TinyPacket(this.Tiny.ProductFilter, "Report"));
         }
 
 

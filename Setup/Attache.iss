@@ -52,6 +52,8 @@ BeveledLabel=jmedved.com
 [Files]
 Source: "Attache.exe";  DestDir: "{app}";  Flags: ignoreversion;
 Source: "Attache.pdb";  DestDir: "{app}";  Flags: ignoreversion;
+Source: "ReadMe.txt";   DestDir: "{app}";  Attribs: readonly;  Flags: overwritereadonly uninsremovereadonly;
+Source: "License.txt";  DestDir: "{app}";  Attribs: readonly;  Flags: overwritereadonly uninsremovereadonly;
 
 
 [Icons]

@@ -1,6 +1,5 @@
 using Medo.Net;
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -41,30 +40,17 @@ namespace Attache {
 
         private static void Run(object parameter) {
             try {
-                var swCollect = Stopwatch.StartNew();
-                var swSend = Stopwatch.StartNew();
+                using (var tiny = new Medo.Net.TinyMessage() { ProductFilter = "Attache", UseOnlyIPv6 = true }) {
+                    tiny.Listen();
 
-                using (var tiny = new Medo.Net.TinyMessage() { UseOnlyIPv6 = true }) {
-                    TinyPacket volumeInfo = null;
+                    tiny.PacketReceived += delegate (object sender, TinyPacketEventArgs e) {
+                        if ("Report".Equals(e.Packet.Operation, StringComparison.OrdinalIgnoreCase)) {
+                            tiny.Send(CreateBeatPacket());
+                            tiny.Send(CreateVolumeInfoPacket());
+                        }
+                    };
 
                     while (!AppServiceThread.CancelEvent.WaitOne(0, false)) {
-                        if ((volumeInfo == null) || (swCollect.Elapsed.TotalSeconds >= Configuration.VolumeInfoInterval)) {
-                            if (volumeInfo != null) { volumeInfo.Dispose(); }
-                            volumeInfo = CreateVolumeInfoPacket();
-
-                            swCollect.Restart();
-                        }
-
-                        if (swSend.Elapsed.TotalSeconds >= Configuration.BeatInterval) {
-                            using (var beat = CreateBeatPacket()) {
-                                tiny.Send(beat);
-                            }
-                            tiny.Send(volumeInfo);
-
-                            Debug.WriteLine(DateTime.Now.ToLongTimeString());
-                            swSend.Restart();
-                        }
-
                         Thread.Sleep(100);
                     }
                 }
