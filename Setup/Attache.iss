@@ -7,8 +7,8 @@
 #define AppSetupFile   AppBase + StringChange(AppVersion, '.', '')
 
 #define AppVersionEx   StringChange(AppVersion, '0.00', '')
-#if "" != HgNode
-#  define AppVersionEx AppVersionEx + " (" + HgNode + ")"
+#if "" != VersionHash
+#  define AppVersionEx AppVersionEx + " (" + VersionHash + ")"
 #endif
 
 
@@ -55,7 +55,7 @@ Source: "Attache.pdb";  DestDir: "{app}";  Flags: ignoreversion;
 
 
 [Icons]
-Name: "{userstartmenu}\Attaché";  Filename: "{app}\Attache.exe"
+Name: "{userstartmenu}\AttachÃ©";  Filename: "{app}\Attache.exe"
 
 
 [Registry]
