@@ -57,7 +57,7 @@ Source: "License.txt";  DestDir: "{app}";  Attribs: readonly;  Flags: overwriter
 
 
 [Icons]
-Name: "{userstartmenu}\Attaché";  Filename: "{app}\Attache.exe"
+Name: "{userstartmenu}\Attache";  Filename: "{app}\Attache.exe"
 
 
 [Registry]
