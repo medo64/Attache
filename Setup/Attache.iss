@@ -85,6 +85,6 @@ function PrepareToInstall(var NeedsRestart: Boolean): String;
 var
     ResultCode: Integer;
 begin
-    Exec(ExpandConstant('{app}\VhdAttachService.exe'), '/Uninstall', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
+    Exec(ExpandConstant('{app}\Attache.exe'), '/Uninstall', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
     Result := Result;
 end;
